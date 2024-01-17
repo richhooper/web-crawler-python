@@ -16,12 +16,8 @@ def save_file_to_disk(baseUrl, responseBody):
     filePath = get_file_path_from_url(baseUrl)
     os.makedirs(os.path.dirname(filePath), exist_ok=True)
 
-    file = open(filePath, "wb")
-    file.write(responseBody)
-    file.flush()
-    file.close()
-    del file
-
+    with open(filePath, "wb") as file:
+        file.write(responseBody)
 
 # -----------------------------------------------
 
