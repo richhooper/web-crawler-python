@@ -7,27 +7,28 @@ import html_parser
 from pathlib import Path
 
 def get_file_path_from_url(url):
-    pathNoProtocol = re.sub(".*://", "", url)
-    if(pathNoProtocol.endswith("/")):
-        pathNoProtocol = pathNoProtocol + "index.html"
-    return os.path.normpath(pathNoProtocol)
+    path_no_protocol = re.sub(".*://", "", url)
+    if(path_no_protocol.endswith("/")):
+        path_no_protocol = path_no_protocol + "index.html"
+    return os.path.normpath(path_no_protocol)
 
-def save_file_to_disk(baseUrl, responseBody):
-    filePath = get_file_path_from_url(baseUrl)
-    os.makedirs(os.path.dirname(filePath), exist_ok=True)
+def save_file_to_disk(base_url, response_body):
+    file_path = get_file_path_from_url(base_url)
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
-    with open(filePath, "wb") as file:
-        file.write(responseBody)
+    with open(file_path, "wb") as file:
+        file.write(response_body)
+
 
 # -----------------------------------------------
 
 urlsCrawled = []
 
-baseUrl = str(sys.argv[1])
+base_url = str(sys.argv[1])
 logging.basicConfig(level=logging.INFO)
 
-responseBody = remote_files.download_file_and_return_bytes(baseUrl)
-save_file_to_disk(baseUrl, responseBody)
-urlsCrawled.append(baseUrl)
+response_body = remote_files.download_file_and_return_bytes(base_url)
+save_file_to_disk(base_url, response_body)
+urlsCrawled.append(base_url)
 
-links = html_parser.find_linked_references(str(responseBody))
+links = html_parser.find_linked_references(str(response_body))

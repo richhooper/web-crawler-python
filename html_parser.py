@@ -8,17 +8,17 @@ class FileReferences:
     images: []
     hyperlinks: []
 
-def find_linked_references(fileBody):
+def find_linked_references(file_body):
 
-    bodyString = fileBody
+    body_string = file_body
     
     # Search the body to find page, script, img and css references
-    scriptSources = re.findall("\\<script\\s.*?\\s?src=\"([a-zA-Z0-9-._~:/?#\[\]@!$&'()*+,;=]*)\"", bodyString)
+    script_sources = re.findall("\\<script\\s.*?\\s?src=\"([a-zA-Z0-9-._~:/?#\[\]@!$&'()*+,;=]*)\"", body_string)
 
-    linkSources = re.findall("\\<link\\s.*?\\s?href=\"([a-zA-Z0-9-._~:/?#\[\]@!$&'()*+,;=]*)\"", bodyString)
+    link_sources = re.findall("\\<link\\s.*?\\s?href=\"([a-zA-Z0-9-._~:/?#\[\]@!$&'()*+,;=]*)\"", body_string)
 
-    imgSources = re.findall("\\<img\\s.*?\\s?src=\"([a-zA-Z0-9-._~:/?#\[\]@!$&'()*+,;=]*)\"", bodyString)
+    img_sources = re.findall("\\<img\\s.*?\\s?src=\"([a-zA-Z0-9-._~:/?#\[\]@!$&'()*+,;=]*)\"", body_string)
 
-    aSources = re.findall("\\<a\\s.*?\\s?href=\"([a-zA-Z0-9-._~:/?#\[\]@!$&'()*+,;=]*)\"", bodyString)
+    a_sources = re.findall("\\<a\\s.*?\\s?href=\"([a-zA-Z0-9-._~:/?#\[\]@!$&'()*+,;=]*)\"", body_string)
 
-    return FileReferences(scriptSources, linkSources, imgSources, aSources)
+    return FileReferences(script_sources, link_sources, img_sources, a_sources)
